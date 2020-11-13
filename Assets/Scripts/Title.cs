@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Title : MonoBehaviour
         if (!firstPush)
         {
             Debug.Log("Go Next Scene!");
+            SceneManager.LoadScene("Main", LoadSceneMode.Single);
             firstPush = true;
         }
     }

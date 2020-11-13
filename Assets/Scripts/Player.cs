@@ -1,30 +1,40 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Player : MonoBehaviour {
-    public Rigidbody2D Body { get; private set; }
-    public RectTransform RectTransform { get; private set; }
+public class Player : MonoBehaviour
+{
+    Rigidbody2D rb;
+    float speed = 0.5f;
+    int key = 0;
 
-    void Awake() {
-        this.Body = gameObject.GetComponent<Rigidbody2D>();
-        this.RectTransform = gameObject.GetComponent<RectTransform>();
+    void Start()
+    {
+        this.rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update() {
-        var currentX = this.RectTransform.localPosition.x;
+    void Update()
+    {
+        GetInputKey();
+        Move();
+    }
 
-        if (Input.GetKey(KeyCode.RightArrow)) {
-            Debug.Log("Right");
-            var newX = Mathf.Min(currentX + 15, 230);
-            var pos = new Vector3(newX, this.RectTransform.localPosition.y, 0);
-            Debug.Log(pos);
-            this.RectTransform.localPosition = pos;
+    void GetInputKey()
+    {
+        key = 0;
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            key = 1;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow)) {
-            Debug.Log("Left");
-
-            var newX = Mathf.Max(currentX - 15, -230);
-            var pos = new Vector3(newX, this.RectTransform.localPosition.y, 0);
-            this.RectTransform.localPosition = pos;
+        else if(Input.GetKey(KeyCode.LeftArrow))
+        {
+            key = -1;
         }
     }
+
+    void Move()
+    {
+        this.transform.position += new Vector3(speed * Time.deltaTime * key, 0, 0);
+    }
+
 }
