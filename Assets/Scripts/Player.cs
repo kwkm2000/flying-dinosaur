@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D rb;
-    float speed = 0.5f;
-    int key = 0;
+    private Rigidbody2D rb;
+    public float speed = 0.5f;
+    public float runForce = 30.0f;
+    public float jumpForce = 390.0f;
+    private int key = 0;
 
     void Start()
     {
@@ -34,6 +36,11 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            this.rb.AddForce(transform.up * this.jumpForce);
+        }
+        //this.rb.AddForce(transform.right * key * this.runForce);
         this.transform.position += new Vector3(speed * Time.deltaTime * key, 0, 0);
     }
 
