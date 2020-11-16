@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float speed = 0.5f;
+    public float speed;
     public float runForce = 30.0f;
     public float jumpForce = 390.0f;
     private int key = 0;
@@ -17,8 +17,25 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        GetInputKey();
-        Move();
+        //GetInputKey();
+        //Move();
+
+        float horizontalKey = Input.GetAxis("Horizontal");
+        float xSpeed = 0.0f;
+        if (horizontalKey > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            xSpeed = speed;
+        }
+        else if (horizontalKey < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            xSpeed = -speed;
+        } else
+        {
+            xSpeed = 0.0f;
+        }
+        rb.velocity = new Vector2(xSpeed, rb.velocity.y);
     }
 
     void GetInputKey()
