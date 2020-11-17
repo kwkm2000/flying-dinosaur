@@ -41,18 +41,19 @@ public class BlockCreater : MonoBehaviour
             for (int i = 0; i <= BlockValueOver; i++)
             {
                 //複製
-                GameObject Blockclone = GameObject.Instantiate(block) as GameObject;
-                //BlockcloneをAllTransの子オブジェクトに
-                Blockclone.transform.parent = AllTrans.transform;
+                GameObject blockClone = GameObject.Instantiate(block) as GameObject;
+                //blockCloneをAllTransの子オブジェクトに
+                blockClone.transform.SetParent(AllTrans.transform, false);
                 //位置を調整
-                Blockclone.transform.position = new Vector3(BlockBaseX, i - BlockBaseY, 0);
+                blockClone.transform.position = new Vector3(BlockBaseX, i - BlockBaseY, 0);
+                //blockClone.transform.localScale = new Vector3(1, 1, 1);
             }
             BlockValueUnder = Random.Range(1, 2);
             for (int j = 0; j <= BlockValueUnder; j++)
             {
-                GameObject Blockclone = GameObject.Instantiate(block) as GameObject;
-                Blockclone.transform.parent = AllTrans.transform;
-                Blockclone.transform.position = new Vector3(BlockBaseX, -j + BlockBaseY, 0);
+                GameObject blockClone = GameObject.Instantiate(block) as GameObject;
+                blockClone.transform.SetParent(AllTrans.transform, false);
+                blockClone.transform.position = new Vector3(BlockBaseX, -j + BlockBaseY, 0);
             }
             timeElapsed = 0.0f;
         }
