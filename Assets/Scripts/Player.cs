@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -17,13 +18,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //GetInputKey();
-        //Move();
+
 
         //float horizontalKey = Input.GetAxis("Horizontal");
         //float xSpeed = 0.0f;
 
-        // 右クリックで飛ぶ
+        // クリックで飛ぶ
         if (Input.GetMouseButtonUp(0))
         {
             this.rb.AddForce(new Vector2(0, jumpForce));
@@ -45,27 +45,16 @@ public class Player : MonoBehaviour
         //rb.velocity = new Vector2(xSpeed, rb.velocity.y);
     }
 
-    void GetInputKey()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        key = 0;
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            key = 1;
-        }
-        else if(Input.GetKey(KeyCode.LeftArrow))
-        {
-            key = -1;
-        }
-    }
+        var collisionName = collision.gameObject.name;
+        var gameOverObjectName = "Thorn";
+        var sceneName = "GameOver";
 
-    void Move()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (collisionName == gameOverObjectName)
         {
-            this.rb.AddForce(transform.up * this.jumpForce);
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         }
-        //this.rb.AddForce(transform.right * key * this.runForce);
-        this.transform.position += new Vector3(speed * Time.deltaTime * key, 0, 0);
     }
 
 }
