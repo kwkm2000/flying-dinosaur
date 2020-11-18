@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D rb;
-    float speed = 0.5f;
-    int key = 0;
+    private Rigidbody2D rb;
+    public float speed;
+    public float runForce = 30.0f;
+    public float jumpForce;
+    private int key = 0;
 
     void Start()
     {
@@ -15,8 +17,32 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        GetInputKey();
-        Move();
+        //GetInputKey();
+        //Move();
+
+        //float horizontalKey = Input.GetAxis("Horizontal");
+        //float xSpeed = 0.0f;
+
+        // 右クリックで飛ぶ
+        if (Input.GetMouseButtonUp(0))
+        {
+            this.rb.AddForce(new Vector2(0, jumpForce));
+        }
+
+        //if (horizontalKey > 0)
+        //{
+        //    transform.localScale = new Vector3(1, 1, 1);
+        //    xSpeed = speed;
+        //}
+        //else if (horizontalKey < 0)
+        //{
+        //    transform.localScale = new Vector3(-1, 1, 1);
+        //    xSpeed = -speed;
+        //} else
+        //{
+        //    xSpeed = 0.0f;
+        //}
+        //rb.velocity = new Vector2(xSpeed, rb.velocity.y);
     }
 
     void GetInputKey()
@@ -34,6 +60,11 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            this.rb.AddForce(transform.up * this.jumpForce);
+        }
+        //this.rb.AddForce(transform.right * key * this.runForce);
         this.transform.position += new Vector3(speed * Time.deltaTime * key, 0, 0);
     }
 
