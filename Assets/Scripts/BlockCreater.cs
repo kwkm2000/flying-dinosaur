@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class BlockCreater : MonoBehaviour
 {
-    //BlockCreater.cs
     public GameObject block;
     public GameObject AllTrans;
-    //ブロックが右に流れていくスピード
     public float Allspeed;
-    //何秒ごとにブロックがくるか
     public float timeOut; 
     private float timeElapsed;
 
     private int BlockValueOver;
     private int BlockValueUnder;
-    //画面端にくるブロックのY座標　4.5ぐらい
     public float BlockBaseY;
-    //画面端にくるブロックのX座標　10ぐらい 大きければ遠くからくるから最初の波がくるのが遅くなる。
     public float BlockBaseX;
 
     // Use this for initialization
@@ -36,19 +31,17 @@ public class BlockCreater : MonoBehaviour
 
         if (timeElapsed >= timeOut)
         {
-            BlockValueOver = Random.Range(1, 5);
+            BlockValueOver = Random.Range(2, 5);
 
             for (int i = 0; i <= BlockValueOver; i++)
             {
-                //複製
+
                 GameObject blockClone = GameObject.Instantiate(block) as GameObject;
-                //blockCloneをAllTransの子オブジェクトに
                 blockClone.transform.SetParent(AllTrans.transform, false);
-                //位置を調整
+
                 blockClone.transform.position = new Vector3(BlockBaseX, i - BlockBaseY, 0);
-                //blockClone.transform.localScale = new Vector3(1, 1, 1);
             }
-            BlockValueUnder = Random.Range(1, 2);
+            BlockValueUnder = Random.Range(1, 3);
             for (int j = 0; j <= BlockValueUnder; j++)
             {
                 GameObject blockClone = GameObject.Instantiate(block) as GameObject;
