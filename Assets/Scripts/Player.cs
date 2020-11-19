@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     public float speed;
     public float runForce = 30.0f;
     public float jumpForce;
-    private int key = 0;
 
     void Start()
     {
