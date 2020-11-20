@@ -928,7 +928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 6292802126986118493, guid: 46e05e0048b9648d2b08890f4ca3c1a8, type: 3}
   AllTrans: {fileID: 2002532597}
-  Allspeed: 0.1
+  Allspeed: 0.2
   timeOut: 2
   BlockBaseY: 4.5
   BlockBaseX: 11
